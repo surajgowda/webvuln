@@ -11,22 +11,22 @@ It demonstartes:
 
 todo:
 Create the following vulnerabilities
-RCE – Remote Code Execution
-LFI – Local File Inclusion
-RFI – Remote File Inclusion
-IDOR – Insecure Direct Object Reference
-SSRF – Server-Side Request Forgery
-XXE – XML External Entity
-Open Redirect
-Path Traversal / Directory Traversal
-Broken Access Control
-Insecure Deserialization
-Command Injection
-Clickjacking
-CORS Misconfiguration
-Business Logic Flaws
-Information Disclosure
-File Upload Vulnerabilities
-Mass Assignment
-Security Misconfiguration
-Using Vulnerable / Outdated Components
+- RCE – Remote Code Execution
+- LFI – Local File Inclusion
+- RFI – Remote File Inclusion
+- IDOR – Insecure Direct Object Reference
+- SSRF – Server-Side Request Forgery
+- XXE – XML External Entity
+- Open Redirect
+- Path Traversal / Directory Traversal
+- Broken Access Control
+- Insecure Deserialization
+- Command Injection
+- Clickjacking
+- CORS Misconfiguration
+- Business Logic Flaws
+- Information Disclosure
+- File Upload Vulnerabilities
+- Mass Assignment
+- Security Misconfiguration
+- Using Vulnerable / Outdated Components
