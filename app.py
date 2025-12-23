@@ -76,8 +76,6 @@ def get_db():
     return sqlite3.connect(DB_NAME)
 
 def delete_comments_job():
-    print(f"[{datetime.now()}] Deleting comments...")
-
     conn = sqlite3.connect(DB_NAME)
     cur = conn.cursor()
 
@@ -91,7 +89,7 @@ def start_scheduler():
     scheduler.add_job(
         delete_comments_job,
         trigger="interval",
-        minutes=10,
+        minutes=1,
         id="delete_comments_job",
         replace_existing=True
     )
