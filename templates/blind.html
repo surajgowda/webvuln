@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blind SQL Injection Demo</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f4f4;
+            padding:0;
+            margin:0;
+        }
+        .box {
+            background: white;
+            padding: 20px;
+            width: 500px;
+            margin: auto;
+            border-radius: 8px;
+        }
+        input, button {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+        }
+        .result {
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        .sql {
+            background: #eee;
+            padding: 10px;
+            margin-top: 10px;
+            font-family: monospace;
+        }
+        /* NAVBAR */
+        .navbar {
+            background-color: #1f2933;
+            color: white;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar .logo {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .navbar ul li a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+     <div class="navbar">
+        <div class="logo">SecureApp</div>
+
+        <ul>
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/comment">Comments (XSS)</a></li>
+             <li><a href="/search">Products (SQLi)</a></li>
+             <li><a href="/blind">Blind SQLi</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </div>
+    <br>
+<div class="box">
+    <h2>Blind SQL Injection (Boolean-Based)</h2>
+
+    <form method="POST">
+        <input type="text" name="username" placeholder="Enter username">
+        <button type="submit">Check</button>
+    </form>
+
+    {% if query_used %}
+        <div class="sql">
+            <b>Executed SQL:</b><br>{{ query_used }}
+        </div>
+    {% endif %}
+
+    {% if message %}
+        <div class="result">{{ message }}</div>
+    {% endif %}
+</div>
+
+</body>
+</html>
