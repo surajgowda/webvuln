@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, redirect, session
 import sqlite3
 import os
+from apscheduler.schedulers.background import BackgroundScheduler
 
 app = Flask(__name__)
 DB_NAME = "tables.db"
@@ -80,12 +81,12 @@ def get_db_connection():
     return conn
 
 def delete_comments_job():
-    print(f"[{datetime.now()}] Running delete_comments_job")
+    print(f"[{datetime.now()}] Deleting comments...")
 
-    conn = get_db_connection()
-    cursor = conn.cursor()
+    conn = sqlite3.connect(DB_NAME)
+    cur = conn.cursor()
 
-    cursor.execute("DELETE FROM comments")
+    cur.execute("DELETE FROM comments")
     conn.commit()
 
     conn.close()
@@ -96,10 +97,10 @@ def start_scheduler():
         delete_comments_job,
         trigger="interval",
         minutes=10,
-        id="delete_comments",
+        id="delete_comments_job",
         replace_existing=True
     )
-    scheduler.start()    
+    scheduler.start()  
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
