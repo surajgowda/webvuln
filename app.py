@@ -62,7 +62,7 @@ def comments():
         # ❌ Store user input as-is (XSS vulnerability)
         cur.execute("INSERT INTO comments (content) VALUES (?)", (comment,))
         conn.commit()
-        return redirect("/")
+        return redirect("/comment")
 
     # Fetch all comments
     cur.execute("SELECT content FROM comments ORDER BY id DESC")
