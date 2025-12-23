@@ -74,6 +74,33 @@ def comments():
 def get_db():
     return sqlite3.connect(DB_NAME)
 
+def get_db_connection():
+    conn = sqlite3.connect(DB_NAME)
+    conn.row_factory = sqlite3.Row
+    return conn
+
+def delete_comments_job():
+    print(f"[{datetime.now()}] Running delete_comments_job")
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("DELETE FROM comments")
+    conn.commit()
+
+    conn.close()
+
+def start_scheduler():
+    scheduler = BackgroundScheduler(daemon=True)
+    scheduler.add_job(
+        delete_comments_job,
+        trigger="interval",
+        minutes=10,
+        id="delete_comments",
+        replace_existing=True
+    )
+    scheduler.start()    
+
 @app.route("/search", methods=["GET", "POST"])
 def search():
     results = []
@@ -188,4 +215,5 @@ def blind():
 
 if __name__ == "__main__":
     init_db()
+    start_scheduler()
     app.run(debug=True)
